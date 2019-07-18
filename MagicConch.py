@@ -7,26 +7,30 @@ def main():
 	#go = input("Ask a question? (Y/N)")
 	#print(go)
 
+	folder = 1
+	folder = random.randint(0,1)
+	if folder == 0: 
+		path = '/home/pi/RecordedResponses'
+	else:
+		path = '/home/pi/SBResponse'
 
-	#path = '/home/pi/MagicResponses'
-	path = os.getcwd()+'/MagicResponses'
+	print("Playing from the %s folder"%path)
 
 	Responses = []
 	# r=root, d=directories, f = files
 	for r, d, f in os.walk(path):
 		for file in f:
 			Responses.append(os.path.join(r, file))
-
 	'''
 	for f in Responses:
     		print(f)
 	'''
-	while True:
-		num = (random.randint(1,len(Responses)) - 1)
-		file = str(Responses[num]).replace(' ','\ ')
-		print("Now Playing %s"%file)
-		os.system("mpg123 %s"%file)
-		input("Press any button to continue")
+
+	num = random.randint(0,len(Responses)-1)
+	print(num)
+	file = str(Responses[num]).replace(' ','\ ')
+	print("Now Playing %s"%file)
+	os.system("mpg123 %s"%file)
 
 	print("done!")
 
